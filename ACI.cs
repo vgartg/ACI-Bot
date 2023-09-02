@@ -17,6 +17,7 @@ namespace TGBot
          public static int count = -1;
          public static int urlcode = 0;
          public static int videonamecode = 0;
+          public static int oldrand = -1;
          const string key = "INSERT HERE YOUR PASSWORD WITH WHICH YOU WANT TO UNLOCK THE BOT";
 
          async static Task Update(ITelegramBotClient client, Update update, CancellationToken token)
@@ -395,14 +396,60 @@ namespace TGBot
                      }
                  }
 
-                 if (message.Photo != null)
+                 if (message.Sticker != null || message.Photo != null)
                  {
-                     await client.SendTextMessageAsync(message.Chat.Id, "Don't send photos! I don't know how to work with them yet");
-                 }
-
-                 if (message.Sticker != null)
-                 {
-                     await client.SendStickerAsync(message.Chat.Id, InputFile.FromUri("https://github.com/TelegramBots/book/raw/master/src/docs/sticker-fred.webp"));
+                     string[] stickersCats = new string[]
+                    {
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_001.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_002.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_005.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_006.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_004.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_007.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_008.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_011.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_014.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_015.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_020.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_019.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_023.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_022.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_027.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_029.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_035.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_037.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_055.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_061.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_062.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_067.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_077.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_086.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_089.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_090.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_091.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_092.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_096.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_093.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_099.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_102.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_105.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_111.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_112.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_113.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_117.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_115.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_118.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_119.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_114.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_110.webp?v=1693179002",
+                        "https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_107.webp?v=1693179002"
+                    };
+                    Random r = new Random();
+                    var rand = r.Next(0, stickersCats.Length - 1);
+                    while (rand == oldrand) rand = r.Next(0, stickersCats.Length - 1);
+                    await client.SendStickerAsync(message.Chat.Id, InputFile.FromUri(stickersCats[rand]));
+                    oldrand = rand;
+                    return;
                  }
 
                  else
