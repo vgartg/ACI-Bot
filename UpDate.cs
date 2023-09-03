@@ -39,16 +39,5 @@ namespace UpdateACI {
                 Console.WriteLine(e.Message);
             }
         }
-
-        async public static void FindVideoByName(ITelegramBotClient client, Message message) {
-            if (message != null) {
-                try {
-                    var video_name = message.Text.Replace(' ', '+');
-                    Process.Start(new ProcessStartInfo { FileName = $@"https://www.youtube.com/results?search_query={video_name}", UseShellExecute = true });
-                    await client.SendTextMessageAsync(message.Chat.Id, $"Opened YouTube with a request: {message.Text}!");
-                }
-                catch (Exception e) { Console.WriteLine(e.Message); }
-            }
-        }
     }
 }
