@@ -98,7 +98,10 @@ namespace UpdateACI {
                         if (int.Parse(rand) < 100) rand = "0" + rand;
                         await client.SendStickerAsync(message.Chat.Id, InputFile.FromUri($"https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_{rand}.webp?v=1693179002"));
                     }
-                    else if (UpDate.waitingText == 1) UpDate.FindVideoByName(client, message);
+                    else if (UpDate.waitingText == 1) {
+                        var video_name = message.Text.Replace(' ', '+');
+                        UpDate.OpenReadyUrl(client, message, $"Opened YouTube with a request: {message.Text}!", $"https://www.youtube.com/results?search_query={video_name}");
+                    }
                     else if (UpDate.waitingURL == 1) UpDate.OpenReadyUrl(client, message, "Opened your URL!", inputString);
                     else await client.SendTextMessageAsync(message.Chat.Id, "Sorry, I didn't understand you! Try using hints"); break;
             }    
