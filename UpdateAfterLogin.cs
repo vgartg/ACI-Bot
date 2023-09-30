@@ -40,6 +40,9 @@ namespace UpdateACI {
 
                             $"Danger Zone:" +
                             $"\n/turn_off_pc - turn off the computer\n"); break;
+
+                            //YOU CAN ADD YOUR TEAM HERE AND DESCRIPTION OF THEM
+                    
                 case "/stop": 
                     UpDate.SendMes(client, message, "Ending your session...");
                     try {
