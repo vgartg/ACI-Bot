@@ -99,6 +99,7 @@ namespace UpdateACI {
                         Random r = new Random();
                         var rand = r.Next(1, 120).ToString();
                         if (int.Parse(rand) < 100) rand = "0" + rand;
+                        if (int.Parse(rand) < 10) rand = "0" + rand;
                         await client.SendStickerAsync(message.Chat.Id, InputFile.FromUri($"https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_{rand}.webp?v=1693179002"));
                     }
                     else if (UpDate.waitingText == 1) {
