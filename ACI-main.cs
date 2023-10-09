@@ -13,7 +13,7 @@ namespace TGBot {
             var message = update.Message;
             if (message != null) {
                 if (!UpDate.users.Contains(message.Chat.Username)) {
-                    if (message.Text != UpDate.key) UpDate.SendMes(client, message, "Enter key to activate bot:" +
+                    if (message.Text != UpDate.key) await client.SendTextMessageAsync(message.Chat.Id, "Enter key to activate bot:" +
                         "\n\nIf you see this message for the second time, then the key was entered incorrectly.");
                     else {
                         UpDate.users.Add(message.Chat.Username);
