@@ -92,21 +92,25 @@ namespace UpdateACI {
                     UpDate.CloseProcess(client, message, "Closed Discord!", "discord"); break;
                 default:
                     if (inputString == UpDate.key) await client.SendTextMessageAsync(message.Chat.Id, $"Key is correct! Welcome to ACI:" +
-                        $"\n\nHello, my name is ACI! I remember you until the end of this session" +
-                        $"\n/help - all my commands" +
-                        $"\n/stop - end session");
-                    else if (message.Sticker != null || message.Photo != null) {
+                    $"\n\nHello, my name is ACI! I remember you until the end of this session" +
+                    $"\n/help - all my commands" +
+                    $"\n/stop - end session");
+                    else if (message.Sticker != null || message.Photo != null)
+                    {
                         Random r = new Random();
                         var rand = r.Next(1, 120).ToString();
                         if (int.Parse(rand) < 100) rand = "0" + rand;
                         if (int.Parse(rand) < 10) rand = "0" + rand;
                         await client.SendStickerAsync(message.Chat.Id, InputFile.FromUri($"https://chpic.su/_data/stickers/k/kisiiiiiii/kisiiiiiii_{rand}.webp?v=1693179002"));
                     }
-                    else if (UpDate.waitingText == 1) {
+                    else if (UpDate.waitingText == 1)
+                    {
                         var video_name = message.Text.Replace(' ', '+');
                         UpDate.OpenReadyUrl(client, message, $"Opened YouTube with a request: {message.Text}!", $"https://www.youtube.com/results?search_query={video_name}");
+                        UpDate.waitingText = 0;
                     }
-                    else if (UpDate.waitingURL == 1) UpDate.OpenReadyUrl(client, message, "Opened your URL!", inputString);
+                    else if (UpDate.waitingProcessName == 1) { UpDate.CloseProcess(client, message, "Closed this process!", message.Text); UpDate.waitingProcessName = 0; }
+                    else if (UpDate.waitingURL == 1) { UpDate.OpenReadyUrl(client, message, "Opened your URL!", inputString); UpDate.waitingURL = 0; }
                     else await client.SendTextMessageAsync(message.Chat.Id, "Sorry, I didn't understand you! Try using hints"); break;
             }    
         }
