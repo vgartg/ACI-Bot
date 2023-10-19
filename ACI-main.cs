@@ -5,7 +5,7 @@ using UpdateACI;
 namespace TGBot {
     class ACI {
         public static void Main(string[] args) {
-            var Client = new TelegramBotClient("6642792498:AAH0FLLbrjzoTz6fyw1AG1q3fi87yfYiPs4");
+            var Client = new TelegramBotClient("Put API-key of bot here");
             Client.StartReceiving(Update, Error);
             Console.ReadLine();
         }
