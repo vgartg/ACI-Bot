@@ -91,7 +91,7 @@ namespace UpdateACI {
                 case "/close_discord":
                     UpDate.CloseProcess(client, message, "Closed Discord!", "discord"); break;
                 default:
-                    if (inputString == UpDate.key) await client.SendTextMessageAsync(message.Chat.Id, $"Key is correct! Welcome to ACI:" +
+                    if (inputString == UpDate.key || (inputString == "/start" && UpDate.users.Contains(message.Chat.Username))) await client.SendTextMessageAsync(message.Chat.Id, $"Key is correct! Welcome to ACI:" +
                     $"\n\nHello, my name is ACI! I remember you until the end of this session" +
                     $"\n/help - all my commands" +
                     $"\n/stop - end session");
